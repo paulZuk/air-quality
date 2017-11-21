@@ -1,26 +1,14 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
-import { getData } from "../actions/index";
+import StationsList from './StationsList'
 
 class App extends Component {
 
-    componentDidMount() {
-        this.props.getData();
-    }
-
     render() {
-        console.log(this.props);
         return(
-            <div>APP</div>
+            <StationsList />
         )
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators( { getData }, dispatch);
-}
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;
 
