@@ -2,15 +2,32 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Detail extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            detailActive: null
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.detailActive) {
+            this.setState({
+                detailActive: nextProps.detailActive,
+            });
+
+        }
+    }
+
 
     render() {
-        const { detailActive } = this.props;
+        const { detailActive } = this.state;
 
         let spanStyle = {
             padding: '0 10px'
         };
 
-        if (typeof detailActive === "undefined") return null;
+        if (detailActive === null) return null;
+        console.log(this.state);
         return (
             <ul
                 className="list-group"

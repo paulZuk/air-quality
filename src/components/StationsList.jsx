@@ -20,12 +20,16 @@ class StationsList extends Component {
     }
 
     handleListClick(id) {
-        
-        this.setState({
-            clicked: id
-        },() => {
-            this.props.getDetailData(id)
-        });
+
+        this.state.clicked === id ?
+
+            this.setState({clicked: null}) :
+
+            this.setState({
+                clicked: id
+            },() => {
+                this.props.getDetailData(id)
+            });
 
 
     }
@@ -39,28 +43,29 @@ class StationsList extends Component {
 
         };
 
-        let liStyle = {
-            cursor: 'pointer'
-        };
-
         if (typeof primaryData === 'undefined') return null;
 
         return (
             <ul className="list-group">
                 {
                     primaryData.map(elem => {
+
+                        let liStyle = {
+                            cursor: 'pointer'
+                        };
+
+                        elem.pollutionLevel === 1 ? Object.assign(liStyle, { backgroundColor: 'lightgreen' }) :
+                            elem.pollutionLevel === 2 ? Object.assign(liStyle, { backgroundColor: 'lightgreen' }) :
+                                elem.pollutionLevel === 3 ? Object.assign(liStyle, { backgroundColor: 'yellow' }) :
+                                    elem.pollutionLevel === 4 ? Object.assign(liStyle, { backgroundColor: 'orange' }):
+                                        elem.pollutionLevel === 5 ? Object.assign(liStyle, { backgroundColor: 'red' }) :
+                                            elem.pollutionLevel === 6 ? Object.assign(liStyle, { backgroundColor: 'red' }) : null;
+
                         return (
                             <li
                                 key={elem.id}
                                 className="list-group-item"
-                                style={
-                                    elem.pollutionLevel === 1 ? {backgroundColor:'lightgreen'} :
-                                        elem.pollutionLevel === 2 ? {backgroundColor:'lightgreen'} :
-                                            elem.pollutionLevel === 3 ? {backgroundColor:'yellow'} :
-                                                elem.pollutionLevel === 4 ? {backgroundColor:'orange'} :
-                                                    elem.pollutionLevel === 5 ? {backgroundColor:'red'} :
-                                                        elem.pollutionLevel === 6 ? {backgroundColor:'red'} : null
-                                }
+                                style={liStyle}
                                 onClick={() => this.handleListClick(elem.id)}
                             >
                                 <span style={spanStyle}>{elem.address.route}</span>

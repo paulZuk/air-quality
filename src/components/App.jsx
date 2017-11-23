@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import StationsList from './StationsList'
+import Header from "./Header";
 
 class App extends Component {
 
     render() {
         return(
-            <StationsList />
+            <div>
+                <Header />
+                <StationsList />
+            </div>
+
         )
     }
 }
