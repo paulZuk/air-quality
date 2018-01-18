@@ -7,7 +7,7 @@ class Header extends Component {
         super(props);
 
         this.state = {
-            risk: 0
+            risk: ""
         }
     }
 
@@ -22,22 +22,24 @@ class Header extends Component {
         }, 0);
         
         averageRisk = sumRisk/primaryData.length;
-
+        console.log(averageRisk);
         
-        // switch (averageRisk) {
-        //     case averageRisk >= 8 :
-        //         return notification = "ALARM !!! Maksik zakłada maskę gazową !!!";
-        //     case averageRisk >= 6 :
-        //         return notification = "Tragedia Maksik zostaje w domu !!!";
-        //     case averageRisk >= 4 :
-        //         return notification = "Zła jakość powietrza Maksik powinien zostać w domu";
-        //     case averageRisk >= 2 :
-        //         return notification = "Powietrze dobre mozna iść na spacer :)";
-        //     case averageRisk >= 1 :
-        //         return notification = "Powietrze bardzo dobre Maksik obowiązkowo idzie na spacer :)";
-        //     default:
-        //         return notification = "???";
-        // }
+        if (averageRisk >= 5) {
+            notification = "ALARM !!! Maksik zakłada maskę gazową !!!";
+        } else if (averageRisk >=4) {
+            notification = "Tragedia Maksik zostaje w domu !!!";
+        } else if (averageRisk >= 3) {
+            notification = "Zła jakość powietrza Maksik powinien zostać w domu";
+        } else if (averageRisk >= 2) {
+            notification = "Szału nie ma ale mozna iść na spacer :)";
+        } else {
+            notification = "Powietrze dobre Maksik idzie na spacer :)";
+        }
+
+        this.setState({
+            risk: notification,
+        });
+
     }
 
     render() {
@@ -48,7 +50,7 @@ class Header extends Component {
                         textAlign:'center',
                     }}
                 >
-                    Air Condition in Kraków
+                    Air quality in Kraków
                 </h1>
                 <button
                     className="btn btn-success"
@@ -60,6 +62,9 @@ class Header extends Component {
                 >
                     Czy Maksik może iść na pole ?
                 </button>
+                <h2 style={{textAlign:'center',margin:'30px'}}>
+                    {this.state.risk}
+                </h2>
             </div>
 
         );

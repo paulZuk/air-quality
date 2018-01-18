@@ -59,7 +59,10 @@ class StationsList extends Component {
                                 elem.pollutionLevel === 3 ? Object.assign(liStyle, { backgroundColor: 'yellow' }) :
                                     elem.pollutionLevel === 4 ? Object.assign(liStyle, { backgroundColor: 'orange' }):
                                         elem.pollutionLevel === 5 ? Object.assign(liStyle, { backgroundColor: 'red' }) :
-                                            elem.pollutionLevel === 6 ? Object.assign(liStyle, { backgroundColor: 'red' }) : null;
+                                            elem.pollutionLevel === 6 ? Object.assign(liStyle, { backgroundColor: 'red' }) :
+                                                Object.assign(liStyle, { backgroundColor: 'white' });
+
+                        if (elem.pollutionLevel === 0) return null;
 
                         return (
                             <li
