@@ -46,12 +46,16 @@ class StationsList extends Component {
         if (typeof primaryData === 'undefined') return null;
 
         return (
-            <ul className="list-group">
+            <ul 
+                className="list-group"
+                style={{width: '80%'}}
+            >
                 {
                     primaryData.map(elem => {
 
                         let liStyle = {
-                            cursor: 'pointer'
+                            cursor: 'pointer',
+                            marginBottom: '5px'
                         };
 
                         elem.pollutionLevel === 1 ? Object.assign(liStyle, { backgroundColor: 'lightgreen' }) :
@@ -67,7 +71,7 @@ class StationsList extends Component {
                         return (
                             <li
                                 key={elem.id}
-                                className="list-group-item"
+                                className="list-group-item d-flex flex-column"
                                 style={liStyle}
                                 onClick={() => this.handleListClick(elem.id)}
                             >
