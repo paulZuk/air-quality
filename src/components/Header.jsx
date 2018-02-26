@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import avgRisk from './calculations/average_risk';
+import {setNotification} from '../actions';
 
 
 class Header extends Component {
@@ -11,38 +13,20 @@ class Header extends Component {
         }
     }
 
-    calculateRisk() {
-        const { primaryData } = this.props;
-        
-        let averageRisk;
-        let notification;
-        let sumRisk = primaryData.reduce(
-            (prev,current) => {
-            return prev + current.pollutionLevel
-        }, 0);
-        
-        averageRisk = sumRisk/primaryData.length;
-        console.log(averageRisk);
-        
-        if (averageRisk >= 5) {
-            notification = "ALARM !!! Maksik zakłada maskę gazową !!!";
-        } else if (averageRisk >=4) {
-            notification = "Tragedia Maksik zostaje w domu !!!";
-        } else if (averageRisk >= 3) {
-            notification = "Zła jakość powietrza Maksik powinien zostać w domu";
-        } else if (averageRisk >= 2) {
-            notification = "Szału nie ma ale mozna iść na spacer :)";
-        } else {
-            notification = "Powietrze dobre Maksik idzie na spacer :)";
-        }
+    setRiskNotification() {
 
         this.setState({
-            risk: notification,
+            risk: this.props.notification.text,
         });
 
     }
 
     render() {
+        
+        if(!this.props.notification) {
+            return null;
+        }
+        
         return (
             <div>
                 <h1
@@ -58,7 +42,7 @@ class Header extends Component {
                         display:'block',
                         margin:'30px auto'
                     }}
-                    onClick={() => this.calculateRisk()}
+                    onClick={() => this.setRiskNotification()}
                 >
                     Czy Maksik może iść na pole ?
                 </button>
@@ -73,10 +57,11 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
-    const { primaryData } = state;
+    const { primaryData, notification } = state;
     return {
-        primaryData
+        primaryData,
+        notification
     }
 }
 
-export default connect(mapStateToProps, null)(Header);
+export default connect(mapStateToProps, { setNotification })(Header);

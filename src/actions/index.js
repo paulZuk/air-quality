@@ -1,4 +1,4 @@
-import { GET_DATA, GET_DETAIL_DATA } from "../constants";
+import { GET_DATA, GET_DETAIL_DATA, SET_NOTIFICATION } from "../constants";
 import axios from 'axios';
 
 const API_KEY = '41b751c38eb743abace405e09137a052';
@@ -24,9 +24,14 @@ export const getDetailData = (id) => {
             apikey: API_KEY
         }
     });
-
     return {
         type:GET_DETAIL_DATA,
         payload: data
     }
 };
+
+export const setNotification = () => {
+    return {
+        type: SET_NOTIFICATION, 
+    }
+}

@@ -2,8 +2,23 @@ import React, { Component } from 'react';
 import StationsList from './StationsList'
 import Header from "./Header";
 import PollutionChart from "./PollutionChart";
+import { getData, setNotification } from '../actions';
+import { connect } from 'react-redux';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        this.props.getData();
+    }
+
+    componentDidUpdate(prevProps) {
+        if(!prevProps.primaryData) {
+         this.props.setNotification();
+        }
+    }
 
     render() {
         return(
@@ -23,5 +38,12 @@ class App extends Component {
     }
 }
 
-export default App;
+function mapStateToProps(state) {
+    const { primaryData } = state;
+    return {
+        primaryData
+    }
+}
+
+export default connect(mapStateToProps, { getData, setNotification })(App);
 

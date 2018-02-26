@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { getData, getDetailData } from "../actions/index";
+import { getDetailData } from "../actions/index";
 import Detail from "./Detail";
 
 class StationsList extends Component {
@@ -12,11 +12,6 @@ class StationsList extends Component {
         this.state = {
             clicked: null
         }
-    }
-
-    componentDidMount() {
-        const { getData } = this.props;
-        getData();
     }
 
     handleListClick(id) {
@@ -60,7 +55,7 @@ class StationsList extends Component {
 
                         elem.pollutionLevel === 1 ? Object.assign(liStyle, { backgroundColor: 'lightgreen' }) :
                             elem.pollutionLevel === 2 ? Object.assign(liStyle, { backgroundColor: 'lightgreen' }) :
-                                elem.pollutionLevel === 3 ? Object.assign(liStyle, { backgroundColor: 'yellow' }) :
+                                elem.pollutionLevel === 3 ? Object.assign(liStyle, { backgroundColor: 'gold' }) :
                                     elem.pollutionLevel === 4 ? Object.assign(liStyle, { backgroundColor: 'orange' }):
                                         elem.pollutionLevel === 5 ? Object.assign(liStyle, { backgroundColor: 'red' }) :
                                             elem.pollutionLevel === 6 ? Object.assign(liStyle, { backgroundColor: 'red' }) :
@@ -95,7 +90,7 @@ class StationsList extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators( { getData, getDetailData }, dispatch);
+    return bindActionCreators( { getDetailData }, dispatch);
 }
 
 function mapStateToProps(state) {
