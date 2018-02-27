@@ -35,9 +35,7 @@ class Sparklines extends PureComponent {
         margin: 2
     };
 
-    constructor (props) {
-        super(props);
-    }
+    
 
     render() {
         const {  data, limit, width, height, svgWidth, svgHeight, preserveAspectRatio, margin, style, max, min} = this.props;

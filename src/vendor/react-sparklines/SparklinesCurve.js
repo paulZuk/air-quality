@@ -13,7 +13,7 @@ export default class SparklinesCurve extends React.Component {
     };
 
     render() {
-        const { points, width, height, margin, color, style, divisor = 0.25 } = this.props;
+        const { points, height, margin, color, style, divisor = 0.25 } = this.props;
         let prev;
         const curve = (p) => {
             let res;

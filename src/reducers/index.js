@@ -2,10 +2,17 @@ import {GET_DATA, GET_DETAIL_DATA, SET_NOTIFICATION} from "../constants";
 import avgRisk from '../components/calculations/average_risk';
 
 export default (state = {}, action) => {
+    let newState;
+    
     switch (action.type) {
         case GET_DATA:
-            let newState = {...state, primaryData: action.payload.data};
-            // console.log(newState);
+            const { data } = action.payload;
+
+            let newData = data.filter(station => {
+                return station.pollutionLevel !== 0;
+            });
+            newState = {...state, primaryData: newData};
+            // console.log("get data",newState);
             return newState;
         case GET_DETAIL_DATA:
             newState = {...state, detailActive: action.payload.data};

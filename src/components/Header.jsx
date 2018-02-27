@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import avgRisk from './calculations/average_risk';
-import {setNotification} from '../actions';
+import { setNotification } from '../actions';
 
 
 class Header extends Component {
@@ -29,13 +28,13 @@ class Header extends Component {
         
         return (
             <div>
-                <h1
+                {/* <h1
                     style={{
                         textAlign:'center',
                     }}
                 >
                     Air quality in Kraków
-                </h1>
+                </h1> */}
                 <button
                     className="btn btn-success"
                     style={{
