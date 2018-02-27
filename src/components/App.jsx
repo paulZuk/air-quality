@@ -5,16 +5,28 @@ import PollutionChart from "./PollutionChart";
 import { getData, setNotification } from '../actions';
 import { connect } from 'react-redux';
 
+let interval;
+
 class App extends Component {
 
     componentDidMount() {
+        let minutes = .5;
+
         this.props.getData();
+
+         interval = setInterval(() => {
+            this.props.getData();
+         }, minutes * 60000); 
     }
 
     componentDidUpdate(prevProps) {
         if(!prevProps.primaryData) {
          this.props.setNotification();
         }
+    }
+
+    componentWillUnmount() {
+        clearInterval(interval);
     }
 
     render() {
